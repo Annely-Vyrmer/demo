@@ -1,13 +1,15 @@
-package ee.bcs.valiit.solution;
+package ee.bcs.valiit.kodusedharjutused;
 
-public class Lesson2cSolution {
+public class Lesson2CHarjutused {
 
     public static void main(String[] args) {
-
+        //System.out.println(sequence3n(10, 20));
+        //System.out.println(getSeqLength(22));
+        //System.out.println(nextElement(22));
     }
 
     // TODO
-    // Täüsem lugemine: https://onlinejudge.org/external/1/100.pdf
+    // Täpsem lugemine: https://onlinejudge.org/external/1/100.pdf
     // Kujutame ette numbrite jada, kus juhul kui number on paaris arv siis me jagame selle 2-ga
     // Kui number on paaritu arv siis me korrutame selle 3-ga ja liidame 1. (3n+1)
     // Seda tegevust teeme me niikaua kuni me saame vastuseks 1
@@ -27,14 +29,14 @@ public class Lesson2cSolution {
     // kutsuge iga väärtuse korral välja meetodit getSeqLength
     // salvestage maha kõige suurem ja funktsiooni lõpus tagastage see
     public static int sequence3n(int x, int y) {
-        int max = 0;
-        for(int i = x; i <= y; i++){
-            int sum = getSeqLength(i);
-            if (sum > max) {
-                max = sum;
+        int pikimJada = 0;
+        for (int i = x; i <= y; i++){
+            int kordadeArvuSumma = getSeqLength(i);
+            if (kordadeArvuSumma > pikimJada){
+                pikimJada = kordadeArvuSumma;
             }
         }
-        return max;
+        return pikimJada;
     }
 
     // TODO 2
@@ -42,23 +44,27 @@ public class Lesson2cSolution {
     // x = 2 -> 2
     // kutsuge välja meetodit nextElement nii kaua kuni vastus tuleb 1
     // tagastage korduste arv + 1
-    public static int getSeqLength(int x){
-        int count = 1;
-        while(x > 1){
+    public static int getSeqLength(int x) {
+        int kordustearv = 1;
+        while (x > 1){
             x = nextElement(x);
-            count++;
+            kordustearv++;
         }
-        return count;
+        return kordustearv;
     }
 
     // TODO 1
+    // TODO tagasta sequence järgmine element
     // x = 1 -> 4
     // x = 2 -> 1
     // x = 3 -> 10
-    public static int nextElement(int x){
-        if(x%2 == 0){
-            return x / 2;
+    //leia ühe võrra järgmine element!
+    //arvuta jada järgmine element
+    public static int nextElement(int x) {
+        if (x%2==0){
+            return x/2;
+        } else {
+            return (x*3)+1;
         }
-        return x * 3 + 1;
     }
 }

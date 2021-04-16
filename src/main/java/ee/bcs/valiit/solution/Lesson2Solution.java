@@ -3,7 +3,8 @@ package ee.bcs.valiit.solution;
 public class Lesson2Solution {
 
     public static void main(String[] args) {
-        multiplyTable(5, 5);
+
+        //multiplyTable(5, 5);
     }
 
     // TODO loe funktsiooni sisendiks on täisarvude massiiv

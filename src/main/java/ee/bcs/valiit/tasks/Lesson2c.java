@@ -3,7 +3,9 @@ package ee.bcs.valiit.tasks;
 public class Lesson2c {
 
     public static void main(String[] args) {
-
+        //System.out.println(sequence3n(10, 20));
+        System.out.println(getSeqLength(22));
+        //System.out.println(nextElement(22));
     }
 
     // TODO
@@ -27,7 +29,14 @@ public class Lesson2c {
     // kutsuge iga väärtuse korral välja meetodit getSeqLength
     // salvestage maha kõige suurem ja funktsiooni lõpus tagastage see
     public static int sequence3n(int x, int y) {
-        return 0;
+        int pikimJada = 0;
+        for (int i = x; i <= y; i++) {
+            int summa = getSeqLength(i);
+            if (summa > pikimJada) {
+                pikimJada = summa;
+            }
+        }
+        return pikimJada;
     }
 
     // TODO 2
@@ -35,17 +44,28 @@ public class Lesson2c {
     // x = 2 -> 2
     // kutsuge välja meetodit nextElement nii kaua kuni vastus tuleb 1
     // tagastage korduste arv + 1
-    public static int getSeqLength(int x){
-        return 0;
+    public static int getSeqLength(int x) {
+        int kordusteArv = 1;        //mitmenda numbriga on tegu
+        while (x > 1) {             // xga tähistame jada väärtust. kas käes olev väärtus on 1st suurem (5)
+            x = nextElement(x);     //
+            kordusteArv++;          //siin suurendame korduste arvu ühe võrra
+        }
+        return kordusteArv;         //
     }
 
     // TODO 1
     // x = 1 -> 4
     // x = 2 -> 1
     // x = 3 -> 10
-    public static int nextElement(int x){
+    //leia ühe võrra järgmine element!
+    public static int nextElement(int x) {
         // TODO tagasta sequence järgmine element
-        return 0;
+        //arvuta jada järgmine element
+        if (x % 2 == 0) {
+            return x / 2;     //siin tagasta x/2, ehk x väärtus jagatud kahega, nagu ülesandes vaja oli
+        } else {
+            x = x * 3 + 1;
+            return x;
+        }
     }
-
 }
