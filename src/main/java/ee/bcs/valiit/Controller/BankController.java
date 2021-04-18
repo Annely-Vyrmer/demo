@@ -9,12 +9,12 @@ import java.util.Map;
 public class BankController {
     public Map<String, Double> accountBalanceMap = new HashMap<>();
 
-    //Lood Mapi põhja ja sinna salvestuvad kontod/summad
-    //http://localhost:8080/accounts
-    @GetMapping("accounts")
-    public Map<String, Double> getAccounts() {
-        return accountBalanceMap;
-    }
+//    //Lood Mapi põhja ja sinna salvestuvad kontod/summad
+//    //http://localhost:8080/accounts
+//    @GetMapping("accounts")
+//    public Map<String, Double> getAccounts() {
+//        return accountBalanceMap;
+//    }
 
     //http://localhost:8080/createAccount/EE1212/500               //Lisasin URLi real kontosid jurude
     @PostMapping("createAccount/{accountNo}/{balance}")

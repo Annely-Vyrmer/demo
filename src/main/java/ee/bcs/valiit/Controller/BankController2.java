@@ -10,31 +10,38 @@ import java.util.Map;
 public class BankController2 {
     public Map<String, BankAccounts> accountBalanceMap = new HashMap<>();
 
-    //http://localhost:8080/accounts
-    @GetMapping("accounts")
-    public Map<String, BankAccounts> getAccounts() {
-        return accountBalanceMap;
-    }
+//    //http://localhost:8080/accounts
+//    @GetMapping("accounts")
+//    public Map<String, BankAccounts> getAccounts() {
+//        return accountBalanceMap;
+//    }
+
     //Create Account
     //http://localhost:8080/createAccount2/EE1212/Tiiu/500
     @PostMapping("createAccount2/{accountNo}/{accountOwnerName}/{balance}")
     public String createAccount2(@PathVariable("accountNo") String accountNo,
-                                @PathVariable("accountOwnerName") String accountOwnerName,
-                                @PathVariable("balance") double balance) {
-    BankAccounts account = new BankAccounts();
-    account.setAccountNo(accountNo);
-    account.setAccountOwnerName(accountOwnerName);
-    account.setBalance(balance);
-    account.setLocked(false);
-    accountBalanceMap.put(accountNo, account);
+                                 @PathVariable("accountOwnerName") String accountOwnerName,
+                                 @PathVariable("balance") double balance) {
+        BankAccounts account = new BankAccounts();
+        account.setAccountNo(accountNo);
+        account.setAccountOwnerName(accountOwnerName);
+        account.setBalance(balance);
+        account.setLocked(false);
+        accountBalanceMap.put(accountNo, account);
         return "Your new account number is: " + accountNo + ". \n" +
                 "Current account balance is euro: " + balance + " euro.";
     }
+
 //    //BLOCK ACCOUNT
-//    //http://
-//    @PutMapping("blockAccount")
-//    public String blockAccount(@PathVariable"accountNo" String accountNo){
-//        acc
+//    //http://localhost:8080/blockAccount2/EE1212/lock
+//    @PutMapping("blockAccount2/{accountNo}/lock")
+//    public String lock(@PathVariable("accountNo") String accountNo) {
+//        return null;
+//    }
+//    //http://localhost:8080/blockAccount2/EE1212/lock
+//    @PutMapping("blockAccount2/{accountNo}/unlock")
+//    public String unlock(@PathVariable("accountNo") String accountNo) {
+//        return null;
 //    }
 
     //Get Balance
@@ -47,6 +54,7 @@ public class BankController2 {
             return "Your account (" + accountNo + ") balance is " + accountBalanceMap.get(accountNo).getBalance() + " euro.";
         }
     }
+
     //Deposit Money
     //http://localhost:8080/depositMoney2/EE1212/100
     @PutMapping("depositMoney2/{accountNo}/{deposit}")
@@ -97,4 +105,4 @@ public class BankController2 {
 //        } else {
 //            return "Invalid input.";
 //        }
-    }
+}
