@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class BankController3 {
+public class BankController4 {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
