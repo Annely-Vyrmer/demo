@@ -11,7 +11,6 @@
             </column>
             <column name="name" type="text"/>
         </createTable>
-
         <createTable tableName="book">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -31,6 +30,16 @@
             <column name="name" type="text"/>
             <column name="address" type="text"/>
             <column name="phone" type="text"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2021-04-21" author="Annely">
+        <createTable tableName="bank_account">
+            <column name="customer_name" type="text"/>
+            <column name="account_balance" type="numeric"/>
+            <column name="account_number" type="text">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="locked" type="boolean" />
         </createTable>
     </changeSet>
 </databaseChangeLog>

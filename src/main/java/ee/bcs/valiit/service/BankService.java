@@ -23,9 +23,11 @@ public class BankService {
     public void lock4(String accountNo){
         accountRepository.lock4(accountNo);
     }
+
     public void unlock4(String accountNo){
         accountRepository.unlock4(accountNo);
     }
+
     public String getBalance4(String accountNo) {
         Boolean isLocked = accountRepository.isLocked(accountNo);
         if (isLocked) {
