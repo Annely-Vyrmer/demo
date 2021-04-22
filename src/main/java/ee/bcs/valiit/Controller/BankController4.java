@@ -1,6 +1,7 @@
 package ee.bcs.valiit.Controller;
 
 import ee.bcs.valiit.service.BankService;
+import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;

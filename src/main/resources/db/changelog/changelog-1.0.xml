@@ -42,4 +42,13 @@
             <column name="locked" type="boolean" />
         </createTable>
     </changeSet>
+    <changeSet id="2021-04-21b" author="Annely">
+        <createTable tableName="transactions_history">
+            <column name="account_number" type="text"/>
+            <column name="date" type="timestamp"/>
+            <column name="account_balance" type="numeric"/>
+            <column name="deposit" type="numeric"/>
+            <column name="withdraw" type="numeric"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

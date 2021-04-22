@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,5 +59,25 @@ public class AccountRepository {
         paramMap.put("dbNumber", accountNo);
         paramMap.put("newBalance", deposit);
         jdbcTemplate.update(sql1, paramMap);        //UPDATE ei tagasta midagi, kasuta meetodi real VOID
+    }
+        //transactions_history tabelisse kõik deposit money transaktsioonid
+    public void transactionsHistoryDeposit(String accountNo, LocalDateTime date, Double newBalance, Double deposit){
+        String history = "INSERT INTO transactions_history(account_number, date, account_balance, deposit) VALUES(:dbNumber, :dbDate, :dbBalance, :dbDeposit)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbNumber", accountNo);
+        paramMap.put("dbDate", date);
+        paramMap.put("dbBalance", newBalance);
+        paramMap.put("dbDeposit", deposit);
+        jdbcTemplate.update(history, paramMap);
+    }
+    //transactions_history tabelisse kõik withdraw money transaktsioonid
+    public void transactionsHistoryWithdraw(String accountNo, LocalDateTime date, Double newBalance, Double withdraw){
+        String history = "INSERT INTO transactions_history(account_number, date, account_balance, withdraw) VALUES(:dbNumber, :dbDate, :dbBalance, :dbWithdraw)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbNumber", accountNo);
+        paramMap.put("dbDate", date);
+        paramMap.put("dbBalance", newBalance);
+        paramMap.put("dbWithdraw", withdraw);
+        jdbcTemplate.update(history, paramMap);
     }
 }
