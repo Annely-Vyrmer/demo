@@ -1,5 +1,7 @@
 package ee.bcs.valiit.service;
 
+import ee.bcs.valiit.hibernate.AccountHibernateRepository;
+import ee.bcs.valiit.hibernate.HibernateAccount;
 import ee.bcs.valiit.repository.AccountRepository;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class BankService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Autowired
+    private AccountHibernateRepository accountHibernateRepository;
+
     public void createAccount4(String accountNo, String accountName, Double balance) {
         if (balance < 0) {
             throw new SampleApplicationException("Balance cannot be negative. Please correct.");
@@ -34,11 +39,13 @@ public class BankService {
     }
 
     public String getBalance4(String accountNo) {
-        Boolean isLocked = accountRepository.isLocked(accountNo);
-        if (isLocked) {
-            throw new SampleApplicationException("Account (" + accountNo + ") is blocked. Please contact bank service centre.");
-        }                                                           //võtsin siit realt ära else{ ja peale returni }
-        return "Your account (" + accountNo + ") balance is " + accountRepository.getBalance4(accountNo) + " euro.";
+        HibernateAccount account = accountHibernateRepository.getOne(accountNo);
+        return "Your account balance is: " +account.getAccountBalance();
+//        Boolean isLocked = accountRepository.isLocked(accountNo);
+//        if (isLocked) {
+//            throw new SampleApplicationException("Account (" + accountNo + ") is blocked. Please contact bank service centre.");
+//        }                                                           //võtsin siit realt ära else{ ja peale returni }
+//        return "Your account (" + accountNo + ") balance is " + accountRepository.getBalance4(accountNo) + " euro.";
     }
 
     public String depositMoney4(String accountNo, Double deposit) {
