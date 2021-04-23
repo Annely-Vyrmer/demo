@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson1 in JavaScipt</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h2>Minimum number</h2>
+a: <input id="minA"> b: <input id="minB">
+<button id="minButton">Min</button>
+<p>
+    Answer is: <span id="minAnswer"></span>
+</p>
+<script>
+    let minA = document.getElementById("minA");
+    let minB = document.getElementById("minB");
+    let minButton = document.getElementById("minButton");
+    minButton.onclick = function () {
+        let minAnswer = document.getElementById("minAnswer");
+        let a = minA.value;
+        let b = minB.value;
+        if (Number(a) < Number(b)) {
+            minAnswer.innerText = a;
+        } else {
+            minAnswer.innerText = b;
+        }
+    }
+</script>
+<h2>Maximum number</h2>
+a: <input id="maxA"> b: <input id="maxB">
+<button id="maxButton">Max</button>
+<p>
+    Answer is: <span id="maxAnswer"></span>
+</p>
+<script>
+    let maxA = document.getElementById("maxA");
+    let maxB = document.getElementById("maxB");
+    let maxButton = document.getElementById("maxButton");
+    maxButton.onclick = function () {
+        let maxAnswer = document.getElementById("maxAnswer");
+        let a = maxA.value;
+        let b = maxB.value;
+        if (Number(a) > Number(b)) {
+            maxAnswer.innerText = a;
+        } else {
+            maxAnswer.innerText = b;
+        }
+    }
+</script>
+<h2>Absolut number</h2>
+a: <input id="numbA">
+<button id="absButton">Abs</button>
+<p>
+    Answer is: <span id="absAnswer"></span>
+</p>
+<script>
+    let numbA = document.getElementById("numbA");
+    let absButton = document.getElementById("absButton");
+    absButton.onclick = function () {
+        let absAnswer = document.getElementById("absAnswer");
+        let a = numbA.value;
+        if (Number(a) > 0) {
+            absAnswer.innerText = a;
+        } else if (Number(a) < 0) {
+            absAnswer.innerText = -a;
+        } else {
+            absAnswer.innerText = 0;
+        }
+    }
+</script>
+<h2>Is it even number?</h2>
+a: <input id="number">
+<button id="isEvenButton">IsEven</button>
+<p>
+    Answer is: <span id="isEvenAnswer"></span>
+</p>
+<script>
+    let number = document.getElementById("number");
+    let isEvenButton = document.getElementById("isEvenButton");
+    isEvenButton.onclick = function () {
+        let isEvenAnswer = document.getElementById("isEvenAnswer");
+        let a = number.value;
+        if (Number(a) % 2 == 0) {
+            isEvenAnswer.innerText = true;
+        } else {
+            isEvenAnswer.innerText = false;
+        }
+    }
+</script>
+<h2>Smallest number out of 3</h2>
+a: <input id="min3A"> b: <input id="min3B"> c: <input id="min3C">
+<button id="min3Button">Min3</button>
+<p>
+    Answer is: <span id="min3Answer"></span>
+</p>
+<script>
+    let min3A = document.getElementById("min3A");
+    let min3B = document.getElementById("min3B");
+    let min3C = document.getElementById("min3C");
+    let min3Button = document.getElementById("min3Button");
+    min3Button.onclick = function () {
+        let min3Answer = document.getElementById("min3Answer");
+        let a = Number (min3A.value);
+        let b = Number (min3B.value);
+        let c = Number (min3C.value);
+        if (a <= b && a <= c) {
+            min3Answer.innerText = a;
+        } else if (b <= c && b <= a) {
+            min3Answer.innerText = b;
+        } else {
+            min3Answer.innerText = c;
+        }
+    }
+</script>
+<h3>Biggest number out of 3</h3>
+a: <input id="max3A"> b: <input id="max3B"> c: <input id="max3C">
+<button id="max3Button">Max3</button>
+<p>
+    Answer is: <span id="max3Answer"></span>
+</p>
+<script>
+    let max3A = document.getElementById("max3A");
+    let max3B = document.getElementById("max3B");
+    let max3C = document.getElementById("max3C");
+    let max3Button = document.getElementById("max3Button");
+    max3Button.onclick = function () {
+        let max3Answer = document.getElementById("max3Answer");
+        let a = max3A.value;                                        //saab panna Number, et Int(if sees/asemel) ka siia: let a = Number (max3A.value);
+        let b = max3B.value;
+        let c = max3C.value;
+        if (Number(a) >= Number(b) && Number(a) >= Number(c)) {     //Kui Number defineeritud real 128-130, siis saab siin puhtamaks
+            max3Answer.innerText = a;
+        } else if (Number(b) >= Number(c) && Number(b) >= Number(a)) {
+            max3Answer.innerText = b;
+        } else {
+            max3Answer.innerText = c;
+        }
+    }
+</script>
+</body>
+</html>
