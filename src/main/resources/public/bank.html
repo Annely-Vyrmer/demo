@@ -5,100 +5,226 @@
     <title>Everyone Gets Rich Bank</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        body{background-color: white;
-        font-family: Calibri}
-        h2 {color: darkmagenta}
-        h3 {color: grey}
-        button {background-color: darkmagenta; border-color: darkmagenta; color: white}
+        body {
+            background-color: white;
+            font-family: Calibri
+        }
+
+        h2 {
+            color: darkmagenta
+        }
+
+        h3 {
+            color: grey
+        }
+
+        button {
+            background-color: darkmagenta;
+            border-color: darkmagenta;
+            color: white
+        }
     </style>
 </head>
 <body>
 <h2>Hello, welcome to Bank EGR</h2>
 <br>
-<p><h3>Create account</h3></p>
+<p>
+<h3>CREATE ACCOUNT</h3></p>
 <table border="0">
     <tr>
         <td>Account number:</td>
-        <td><input></td>
+        <td><input id="accountNumber"></td>
         </td>
     </tr>
     <tr>
         <td>Account owner name:</td>
-        <td><input></td>
+        <td><input id="accountOwnerName"></td>
     </tr>
     <tr>
         <td>Balance:</td>
-        <td><input></td>
+        <td><input id="balance"></td>
     </tr>
     <tr>
         <td></td>
-        <td><button> SUBMIT</button></td>
-    </tr>
-</table>
-<p><h3>Get balance</h3></p>
-<table border="0">
-    <tr>
-        <td>Account number:</td>
-        <td><input></td>
+        <td>
+            <button id="createAccountButton"> SUBMIT</button>
         </td>
     </tr>
-      <tr>
-        <td></td>
-        <td><button> SUBMIT</button></td>
-    </tr>
+    <script>
+        //URL: http://localhost:8080/bank.html ning Controlleris @CrossOrigin
+        let accountNumber = document.getElementById("accountNumber");
+        let accountOwnerName = document.getElementById("accountOwnerName");
+        let balance = document.getElementById("balance");
+        let createAccountButton = document.getElementById("createAccountButton");
+        createAccountButton.onclick = function () {
+            let configuration = {
+                method: 'POST'
+            }
+            fetch("http://localhost:8080/createAccount4/" + accountNumber.value +"/"+ accountOwnerName.value +"/"+ balance.value, configuration)
+                .then(response => response.text())
+                .then(function (response) {
+                    alert(response)
+                })
+        }
+    </script>
 </table>
-<p><h3>Deposit money</h3></p>
+<p>
+<h3>Account status</h3>
+Account number: <input id="accountNumber0"><button id="lockAccount">Lock account</button> <button id="unlockAccount">Unlock account</button>
+<script>
+    let accountNumber0 = document.getElementById("accountNumber0");
+    let lockAccount = document.getElementById("lockAccount");
+    let unlockAccount = document.getElementById("unlockAccount");
+    lockAccount.onclick = function () {
+        let configuration = {
+            method: 'PUT'
+        }
+        fetch("http://localhost:8080/lock4/" + accountNumber0.value, configuration)
+            .then(response => response.text())
+            .then(function (response) {
+                alert("Account locked")
+            })
+    }
+    unlockAccount.onclick = function () {
+        let configuration = {
+            method: 'PUT'
+        }
+        fetch("http://localhost:8080/unlock4/" + accountNumber0.value, configuration)
+            .then(response => response.text())
+            .then(function (response) {
+                alert("Account unlocked")
+            })
+    }
+</script>
+<p>
+<h3>Get balance</h3></p>
 <table border="0">
     <tr>
         <td>Account number:</td>
-        <td><input></td>
+        <td><input id="accountNumber1"></td>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button id="getBalanceButton"> SUBMIT</button>
+        </td>
+    </tr>
+    <script>
+        let accountNumber1 = document.getElementById("accountNumber1");
+        let getBalanceButton = document.getElementById("getBalanceButton");
+        getBalanceButton.onclick = function () {
+            fetch("http://localhost:8080/getBalance4/" + accountNumber1.value)
+                .then(response => response.text())
+                .then(function (response) {
+                    alert(response)
+                })
+        }
+    </script>
+</table>
+<p>
+<h3>Deposit money</h3></p>
+<table border="0">
+    <tr>
+        <td>Account number:</td>
+        <td><input id="accountNumber2"></td>
         </td>
     </tr>
     <tr>
         <td>Deposit sum:</td>
-        <td><input></td>
+        <td><input id="depositSum"></td>
     </tr>
     <tr>
         <td></td>
-        <td><button> SUBMIT</button></td>
+        <td>
+            <button id="depositSumButton"> SUBMIT</button>
+        </td>
     </tr>
+    <script>
+        let accountNumber2 = document.getElementById("accountNumber2");
+        let depositSum = document.getElementById("depositSum");
+        let depositSumButton = document.getElementById("depositSumButton");
+        depositSumButton.onclick = function () {
+            let configuration = {
+                method: 'PUT'
+            }
+            fetch("http://localhost:8080/depositMoney4/" + accountNumber2.value + "/" + depositSum.value, configuration)
+                .then(response => response.text())
+                .then(function (response) {
+                    alert(response)
+                })
+        }
+    </script>
 </table>
-</table>
-<p><h3>Withdraw money</h3></p>
+<p>
+<h3>Withdraw money</h3></p>
 <table border="0">
     <tr>
         <td>Account number:</td>
-        <td><input></td>
+        <td><input id="accountNumber3"></td>
         </td>
     </tr>
     <tr>
         <td>Withdraw sum:</td>
-        <td><input></td>
+        <td><input id="withdrawSum"></td>
     </tr>
     <tr>
         <td></td>
-        <td><button> SUBMIT</button></td>
+        <td>
+            <button id="withdrawSumButton"> SUBMIT</button>
+        </td>
     </tr>
+    <script>
+        let accountNumber3 = document.getElementById("accountNumber3");
+        let withdrawSum = document.getElementById("withdrawSum");
+        let withdrawSumButton = document.getElementById("withdrawSumButton");
+        withdrawSumButton.onclick = function () {
+            // let configuration = {
+            //     method: 'PUT'
+            // }
+            fetch("http://localhost:8080/withdrawMoney4/" + accountNumber3.value + "/" + withdrawSum.value)
+                .then(response => response.text())
+                .then(function (response) {
+                    alert(response)
+                })
+        }
+    </script>
 </table>
-<p><h3>Transfer money</h3></p>
+<p>
+<h3>Transfer money</h3></p>
 <table border="0">
     <tr>
         <td>From account:</td>
-        <td><input></td>
+        <td><input id="fromAccount"></td>
         </td>
     </tr>
     <tr>
         <td>To account:</td>
-        <td><input></td>
+        <td><input id="toAccount"></td>
     </tr>
     <tr>
         <td>Transfer sum:</td>
-        <td><input></td>
+        <td><input id="transferSum"></td>
     </tr>
     <tr>
         <td></td>
-        <td><button> SUBMIT</button></td>
+        <td>
+            <button id="transferSumButton"> SUBMIT</button>
+        </td>
     </tr>
+    <script>
+        let fromAccount = document.getElementById("fromAccount");
+        let toAccount = document.getElementById("toAccount");
+        let transferSum = document.getElementById("transferSum");
+        let transferSumButton = document.getElementById("transferSumButton");
+        transferSumButton.onclick = function () {
+            fetch("http://localhost:8080/transferMoney4/" + fromAccount.value + "/" +toAccount.value + "/"+ transferSum.value)
+                .then(response => response.text())
+                .then(function (response) {
+                    alert(response)
+                })
+        }
+    </script>
 </table>
 </body>
 </html>
