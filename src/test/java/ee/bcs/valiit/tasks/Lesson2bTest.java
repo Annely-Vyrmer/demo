@@ -9,7 +9,7 @@ class Lesson2bTest {
     @Test
     void sampleArray() {
         Lesson2b lesson2b = new Lesson2b();
-        int[] answer = lesson2b.sampleArray();
+        int[] answer = Lesson2b.sampleArray();
         int[] expected = {1, 2, 3, 4, 5};
         assertArrayEquals(expected, answer);
     }

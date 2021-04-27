@@ -83,10 +83,7 @@ public class SolutionLesson1 {
     // TODO tagasta true, kui a on paaris arv
     // tagasta false kui a on paaritu arv
     public static boolean isEven(int a) {
-        if (a % 2 == 0) {
-            return true;
-        }
-        return false;
+        return a % 2 == 0;
     }
 
     // TODO tagasta kolmest arvust kõige väiksem

@@ -39,7 +39,7 @@ public class BankService {
     }
 
     public String getBalance4(String accountNo) {
-        HibernateAccount account = accountHibernateRepository.getOne(accountNo);
+        HibernateAccount account = accountHibernateRepository.getOne(accountNo);    //Hibernate! Seotud hibernate>HibernateAccount Classiga
         return "Your account balance is: " +account.getAccountBalance();
 //        Boolean isLocked = accountRepository.isLocked(accountNo);
 //        if (isLocked) {
@@ -69,7 +69,7 @@ public class BankService {
         if (isLocked) {
             throw new SampleApplicationException("Account (" + accountNo + ") is blocked. Please contact bank service centre.");
         } else if (withdraw > currentBalance) {
-            throw new SampleApplicationException("You don´t have sufficient funds to transfer.");
+            throw new SampleApplicationException("You don´t have sufficient funds to withdraw.");
         } else if (withdraw < currentBalance) {
             Double newBalance = currentBalance - withdraw;
             accountRepository.updateBalance4(accountNo, newBalance);

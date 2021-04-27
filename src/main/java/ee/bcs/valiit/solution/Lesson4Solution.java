@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Lesson4Solution {
     // Store account nr as a key and account balance as value
-    private static Map<String, Double> accountBalanceMap = new HashMap<>();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Map<String, Double> accountBalanceMap = new HashMap<>();
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true){

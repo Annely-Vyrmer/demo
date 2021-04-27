@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 public class SampleBankController {
-    private static Map<String, SampleAccount> accountBalanceMap = new HashMap<>();
+    private static final Map<String, SampleAccount> accountBalanceMap = new HashMap<>();
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;

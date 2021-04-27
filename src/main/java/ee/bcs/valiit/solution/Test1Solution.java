@@ -19,11 +19,7 @@ public class Test1Solution {
     public static boolean divides(int a){
         if(a % 3 == 0 && a % 7 != 0){
             return true;
-        } else if (a % 7 == 0 && a % 3 != 0) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return a % 7 == 0 && a % 3 != 0;
     }
 
     // ÜL2

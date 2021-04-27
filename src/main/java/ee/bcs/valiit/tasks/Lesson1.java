@@ -92,10 +92,8 @@ public static void main(String[] args) {
     // TODO tagasta true, kui a on paaris arv
     // tagasta false kui a on paaritu arv
     public static boolean isEven(int a) {
-        if (a % 2 == 0) {      //jagad a 2-ga, jääk on 0, siis on tegu paaris arvuga
-            return true;
-        }
-        return false;
+        //jagad a 2-ga, jääk on 0, siis on tegu paaris arvuga
+        return a % 2 == 0;
     }
 
     // TODO tagasta kolmest arvust kõige väiksem

@@ -17,7 +17,7 @@ public class CharProblem {
 
     //conversion using Character.getNumbericValue() - convert a char to an int
     public static int howOld(final String herOld) {
-        int age = (int) Character.getNumericValue(herOld.charAt(0)); //1st character in string
+        int age = Character.getNumericValue(herOld.charAt(0)); //1st character in string
         return age;
         //System.out.println(age);
     }

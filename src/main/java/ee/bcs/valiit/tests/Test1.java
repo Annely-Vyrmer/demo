@@ -25,11 +25,7 @@ public class Test1 {
             for (int i = 3; i <= a; i++) {
                 if (a % i == 0) {
                     return true;
-                } else if (a % 7 == 0) {
-                    return true;
-                } else {
-                    return false;
-                }
+                } else return a % 7 == 0;
             }
         }
         return false;

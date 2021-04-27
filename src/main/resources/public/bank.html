@@ -11,7 +11,7 @@
         }
 
         h2 {
-            color: darkmagenta
+            color: white;
         }
 
         h3 {
@@ -23,11 +23,23 @@
             border-color: darkmagenta;
             color: white
         }
+        #headerphoto1{
+            background: url(Snowy-forest2.jpg) left top no-repeat, url(Snowy-forest2.jpg) right bottom no-repeat, url(Snowy-forest.jpg) left top repeat;
+            height: 293px;
+        }
+
+        bottomleft {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
-<h2>Hello, welcome to Bank EGR</h2>
+<div id="headerphoto1">
+<h2 id="bottomleft">Hello, welcome to Bank EGR</h2>
 <br>
+</div>
 <p>
 <h3>CREATE ACCOUNT</h3></p>
 <table border="0">
@@ -63,7 +75,7 @@
             fetch("http://localhost:8080/createAccount4/" + accountNumber.value +"/"+ accountOwnerName.value +"/"+ balance.value, configuration)
                 .then(response => response.text())
                 .then(function (response) {
-                    alert(response)
+                    alert("Account created")
                 })
         }
     </script>
@@ -123,6 +135,7 @@ Account number: <input id="accountNumber0"><button id="lockAccount">Lock account
     </script>
 </table>
 <p>
+<h3>TRANSACTIONS</h3></p>
 <h3>Deposit money</h3></p>
 <table border="0">
     <tr>
@@ -179,9 +192,6 @@ Account number: <input id="accountNumber0"><button id="lockAccount">Lock account
         let withdrawSum = document.getElementById("withdrawSum");
         let withdrawSumButton = document.getElementById("withdrawSumButton");
         withdrawSumButton.onclick = function () {
-            // let configuration = {
-            //     method: 'PUT'
-            // }
             fetch("http://localhost:8080/withdrawMoney4/" + accountNumber3.value + "/" + withdrawSum.value)
                 .then(response => response.text())
                 .then(function (response) {

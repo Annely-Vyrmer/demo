@@ -7,8 +7,8 @@ import java.util.Map;
 public class Lesson4 {
     // Store account nr as a key and account balance as value
     // HashMap<String, Account> accountBalanceMap = new HashMap<>();
-    private static Map<String, Double> accountBalanceMap = new HashMap<String, Double>();
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Map<String, Double> accountBalanceMap = new HashMap<String, Double>();
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true) {

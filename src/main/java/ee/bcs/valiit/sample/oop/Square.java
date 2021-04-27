@@ -1,7 +1,7 @@
 package ee.bcs.valiit.sample.oop;
 
 public class Square extends Shape{
-    private int sideLength;
+    private final int sideLength;
 
     public Square(int x, int y, int sideLength){
         super(x, y);

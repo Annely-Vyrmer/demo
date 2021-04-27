@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Lesson4Switch {
     // Store account nr as a key and account balance as value
     //HashMap<String, Account> accountBalanceMap = new HashMap<>();
-    private static Map<String, Double> accountBalanceMap = new HashMap<String, Double>();
+    private static final Map<String, Double> accountBalanceMap = new HashMap<String, Double>();
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
