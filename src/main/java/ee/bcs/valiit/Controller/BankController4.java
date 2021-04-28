@@ -1,12 +1,15 @@
 package ee.bcs.valiit.Controller;
 
 import ee.bcs.valiit.service.BankService;
+import ee.bcs.valiit.solution.controller.SampleAccount2;
+import ee.bcs.valiit.solution.controller.SampleAccount2RowMapper;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -66,6 +69,7 @@ public class BankController4 {
         return bankService.withdrawMoney4(accountNo, withdraw);
     }
 
+    //TRANSFER MONEY
     //http://localhost:8080/transferMoney4/EE9191/EE1222/100
     @CrossOrigin
     @GetMapping("transferMoney4/{fromAccountNo}/{toAccountNo}/{transfer}")
@@ -73,5 +77,12 @@ public class BankController4 {
                                  @PathVariable("toAccountNo") String toAccountNo,
                                  @PathVariable double transfer) {
         return bankService.transferMoney4(fromAccountNo, toAccountNo, transfer);
+    }
+    //All ACCOUNTS
+    //http://localhost:8080/allAccounts
+    @CrossOrigin
+    @GetMapping("allAccounts")
+    public List<AccountInfo> getAllAccounts(){
+        return bankService.getAllAccounts();
     }
 }

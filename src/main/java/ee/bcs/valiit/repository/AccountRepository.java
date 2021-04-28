@@ -1,5 +1,7 @@
 package ee.bcs.valiit.repository;
 
+import ee.bcs.valiit.Controller.AccountInfo;
+import ee.bcs.valiit.Controller.AccountInfoRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -7,8 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class AccountRepository {
@@ -79,5 +80,10 @@ public class AccountRepository {
         paramMap.put("dbBalance", newBalance);
         paramMap.put("dbWithdraw", withdraw);
         jdbcTemplate.update(history, paramMap);
+    }
+
+    public List<AccountInfo> getAllAccounts(){
+        String sql = "SELECT * FROM bank_account";
+        return jdbcTemplate.query(sql, new HashMap(), new AccountInfoRowMapper());
     }
 }

@@ -1,8 +1,12 @@
 package ee.bcs.valiit.service;
 
+import ee.bcs.valiit.Controller.AccountInfo;
+import ee.bcs.valiit.Controller.AccountInfoRowMapper;
 import ee.bcs.valiit.hibernate.AccountHibernateRepository;
 import ee.bcs.valiit.hibernate.HibernateAccount;
 import ee.bcs.valiit.repository.AccountRepository;
+import ee.bcs.valiit.solution.controller.SampleAccount2;
+import ee.bcs.valiit.solution.controller.SampleAccount2RowMapper;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -99,5 +104,9 @@ public class BankService {
             return "You have transferred: " + transfer + " euro from account " + fromAccountNo + ". Your new balance is: " + fromAccNewBalance + " euro. \n" +
                     "Your account " + toAccountNo + " balance is: " + toAccNewBalance + " euro.";
         }
+    }
+
+    public List<AccountInfo> getAllAccounts() {
+        return accountRepository.getAllAccounts();
     }
 }
