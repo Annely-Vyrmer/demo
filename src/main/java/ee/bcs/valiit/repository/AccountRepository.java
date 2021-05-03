@@ -86,4 +86,33 @@ public class AccountRepository {
         String sql = "SELECT * FROM bank_account";
         return jdbcTemplate.query(sql, new HashMap(), new AccountInfoRowMapper());
     }
+
+    public String getPasswordByUserName(String username)  {
+        Map<String, Object> paramMap = new HashMap<>();
+        String sql = "SELECT password FROM table_users WHERE username=:dbUserName";
+        paramMap.put("dbUserName", username);
+        return jdbcTemplate.queryForObject(sql, paramMap, String.class);
+    }
+
+    public void createUser(String username, String password) {
+        String sql = "INSERT INTO table_users(username, password) VALUES(:dbUserName, :dbPassword)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbUserName", username);
+        paramMap.put("dbPassword", password);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+    public boolean userNameExists(String username) {
+        Map<String, String> paramMap = new HashMap<>();
+        String sql = "SELECT count(*) FROM table_users WHERE username=:dbUserName"; //selekteeri kõik read
+        paramMap.put("dbUserName", username);
+        return jdbcTemplate.queryForObject(sql, paramMap, Integer.class) > 0; //kui username olemas, siis peab olema suurem kui 0
+    }
+
+    public void deleteUser(String username) {
+        String sql = "DELETE FROM table_users WHERE username=:dbUserName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("dbUserName", username);
+        jdbcTemplate.update(sql, paramMap);
+    }
 }

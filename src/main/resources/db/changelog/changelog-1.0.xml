@@ -51,4 +51,12 @@
             <column name="withdraw" type="numeric"/>
         </createTable>
     </changeSet>
+    <changeSet id="2021-04-29" author="Annely">
+        <createTable tableName="table_users">
+            <column name="username" type="text">
+                <constraints primaryKey="true"/>
+                </column>
+            <column name="password" type="text"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

@@ -1,23 +1,21 @@
 package ee.bcs.valiit.service;
 
 import ee.bcs.valiit.Controller.AccountInfo;
-import ee.bcs.valiit.Controller.AccountInfoRowMapper;
+import ee.bcs.valiit.Controller.LoginRequest;
 import ee.bcs.valiit.hibernate.AccountHibernateRepository;
 import ee.bcs.valiit.hibernate.HibernateAccount;
 import ee.bcs.valiit.repository.AccountRepository;
-import ee.bcs.valiit.solution.controller.SampleAccount2;
-import ee.bcs.valiit.solution.controller.SampleAccount2RowMapper;
 import ee.bcs.valiit.solution.exception.SampleApplicationException;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BankService {
@@ -27,6 +25,12 @@ public class BankService {
 
     @Autowired
     private AccountHibernateRepository accountHibernateRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     public void createAccount4(String accountNo, String accountName, Double balance) {
         if (balance < 0) {
@@ -45,7 +49,7 @@ public class BankService {
 
     public String getBalance4(String accountNo) {
         HibernateAccount account = accountHibernateRepository.getOne(accountNo);    //Hibernate! Seotud hibernate>HibernateAccount Classiga
-        return "Your account balance is: " +account.getAccountBalance();
+        return "Your account balance is: " + account.getAccountBalance();
 //        Boolean isLocked = accountRepository.isLocked(accountNo);
 //        if (isLocked) {
 //            throw new SampleApplicationException("Account (" + accountNo + ") is blocked. Please contact bank service centre.");
@@ -108,5 +112,41 @@ public class BankService {
 
     public List<AccountInfo> getAllAccounts() {
         return accountRepository.getAllAccounts();
+    }
+
+    public String login(LoginRequest loginRequest) {
+        String password = accountRepository.getPasswordByUserName(loginRequest.getUsername());
+        //if (loginRequest.getPassword().equals(password)) {
+        if (passwordEncoder.matches(loginRequest.getPassword(), password)) {
+            Date today = new Date();
+            Date tokenExpirationDate = new Date(today.getTime() + 1000 * 60 * 60 * 24); //Login kehtib 24h; 1000mil/sek*60*60*24 =kokku 1 ööpäev
+            JwtBuilder jwtBuilder = Jwts.builder()                                      //Tokeni genereerimine
+                    .setExpiration(tokenExpirationDate)                                 //kehtivus
+                    .setIssuedAt(new Date())                                            //issued täna ja praegu
+                    .signWith(SignatureAlgorithm.HS256, "dmVyeVNlY3JldFBhc3N3b3Jk")  //allkirjastada parooliga HS256 algorütm+parool sama, mis TokenFiltris
+                    .claim("username", loginRequest.getUsername());
+            return jwtBuilder.compact();                                                //tagastab jwtBuilderi Tokeni
+        } else {
+            throw new SampleApplicationException("Wrong password");
+        }
+    }
+
+    public void newUser(LoginRequest loginRequest) {
+        if (accountRepository.userNameExists(loginRequest.getUsername())) {
+            throw new SampleApplicationException("Username already exists");
+        } else {
+
+        }
+        String encodedPassword = passwordEncoder.encode(loginRequest.getPassword());
+        loginRequest.setPassword(encodedPassword);
+        accountRepository.createUser(loginRequest.getUsername(), encodedPassword);
+    }
+
+    public void deleteUser(LoginRequest loginRequest) {
+        if (accountRepository.userNameExists(loginRequest.getUsername())) {
+            accountRepository.deleteUser(loginRequest.getUsername());
+        } else {
+            throw new SampleApplicationException("Username doesn´t exists");
+        }
     }
 }
